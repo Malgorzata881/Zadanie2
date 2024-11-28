@@ -1,16 +1,19 @@
+import loginPage from "../e2e/pages/LoginPage";
+
 describe("User can visit GoIt page", () => {
 
     beforeEach("Go to page", () => {
-        cy.visit("https://www.edu.goit.global/account/login")
+        loginPage.visit();
     });
 
-    it("First log in and klog out", () => {
-        cy.get('#user_email').type("m.michalczuk7@o2.pl");
-        cy.get('#user_password').type("123456789");
-        cy.get('.eckniwg2').click();
-
-        cy.get("#open-navigation-menu-mobile").click();
-        cy.get(":nth-child(8) > .next-bve2vl").click();
+    it("First log in and log out", () => {
+        loginPage.loginUser("m.michalczuk7@o2.pl", "123456789")
+        loginPage.logout()
     });
-    
+
+    it("Second log in and log out", () => {
+        loginPage.loginUser("m.michalczuk7@o2.pl, 123456789")
+        loginPage.logout()
+    });
+
 });
